@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angkor-Cal Textile Machine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+     <!-- ✅ Font Awesome (for Facebook icon) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .carousel-item {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            z-index: -1;
+        }
+        .carousel-item.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg fixed w-full z-10 top-0">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Website Logo and Name -->
+            <a href="#" data-section="home" class="flex items-center space-x-2">
+                <!-- Using d13logo.jpg -->
+                <img src="d13logo.jpg" alt="Angkor-Cal Logo" class="h-10 w-10 rounded-full"/>
+                <span class="text-xl md:text-2xl font-bold text-gray-800">Angkor-Cal Textile Machine</span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" data-section="home" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+                <a href="#" data-section="profile" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Profile</a>
+                <a href="#" data-section="products" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Products</a>
+                <a href="#" data-section="services" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Our Services</a>
+                <a href="#" data-section="contact" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300">Contact Us</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden text-gray-600 hover:text-blue-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-6 pb-4">
+            <a href="#" data-section="home" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300">Home</a>
+            <a href="#" data-section="profile" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300">Profile</a>
+            <a href="#" data-section="products" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300">Products</a>
+            <a href="#" data-section="services" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300">Our Services</a>
+            <a href="#" data-section="contact" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Main Content Sections -->
+    <main class="pt-24 pb-12">
+
+        <!-- Home Section (Hero) -->
+        <section id="home" data-section="home" class="section-content bg-blue-600 text-white py-24 md:py-32 overflow-hidden relative">
+            <!-- Background Carousel -->
+            <div id="image-carousel" class="absolute inset-0 z-0">
+                <!-- Using external URLs for background for variety -->
+                <div class="carousel-item active" style="background-image: url('https://chiuvention.com/wp-content/uploads/2025/04/smart-textile-lab.webp');"></div>
+                <div class="carousel-item" style="background-image: url('https://chiuvention.com/wp-content/uploads/2025/03/textile_testing_machine_agent.webp');"></div>
+                <div class="carousel-item" style="background-image: url('https://chiuvention.com/wp-content/uploads/2025/07/蒙版组-47@2x.jpg');"></div>
+            </div>
+
+            <!-- Main Hero Content -->
+            <div class="container mx-auto text-center px-6 relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Innovative Textile Testing Solutions</h1>
+                <p class="text-lg md:text-xl max-w-2xl mx-auto mb-8">Providing high-quality and reliable machinery for the textile industry.</p>
+                <a href="#" data-section="products" class="nav-link bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105">
+                    Explore Products
+                </a>
+            </div>
+        </section>
+
+        <!-- Profile Section -->
+        <section id="profile" data-section="profile" class="section-content hidden py-16 bg-gray-100">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-12">Company Profile</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto text-center">
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        Angkor-Cal Textile Machine is a leading provider of advanced textile testing equipment. We specialize in innovative and highly automated solutions that improve testing accuracy and efficiency. Our instruments are designed with user-friendliness and reliability in mind, helping laboratories and businesses achieve more accurate and reproducible results. We are committed to supporting our customers with intelligent technology and exceptional service.
+                        We embrace the **Digital Future of Textile Testing** by developing smart instruments that combine cutting-edge **RFID, visual inspection, and IoT technologies with AI algorithms**. Our equipment is designed to connect seamlessly with modern lab management systems (like SmarTexLab, ERP, or LIMS) to achieve fully digitalized testing and production, making testing **transparent, faster, and more accurate**.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products List Section -->
+        <section id="products" data-section="products" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-12">Our Products</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product Card 1: InfraDye -->
+                    <a href="#" data-section="product-infradye" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d17.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=InfraDye';" alt="InfraDye Infrared Lab Dyeing Machine" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">InfraDye Infrared Lab Dyeing Machine</h3>
+                        <p class="text-gray-600">A versatile lab dyeing machine for accurate and reproducible dyeing results on various fibers, ensuring uniform heating and excellent color matching.</p>
+                    </a>
+                    <!-- Product Card 2: SmartPull (Generic) -->
+                    <a href="#" data-section="product-smartpull" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d18.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartPull';" alt="SmartPull Tensile Tester" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartPull Tensile Tester</h3>
+                        <p class="text-gray-600">A high-precision tensile tester for a wide range of materials, featuring stable force control and powerful software for comprehensive test data.</p>
+                    </a>
+                     <!-- Product Card 3: SmartShrink -->
+                    <a href="#" data-section="product-smartshrink" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d19.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartShrink';" alt="SmartShrink Shrinkage Rate Tester" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartShrink Shrinkage Rate Tester</h3>
+                        <p class="text-gray-600">This device automatically measures the shrinkage rate of fabrics after washing or dry cleaning, providing accurate and quick results to save time.</p>
+                    </a>
+                    <!-- Product Card 4 -->
+                    <a href="#" data-section="product-airburst" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=AirBurst';" alt="AirBurst Bursting Strength Tester" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">AirBurst Bursting Strength Tester</h3>
+                        <p class="text-gray-600">A pneumatic bursting strength tester for textiles, films, and paper. Features one-button testing, customizable test modes, and automatic protective cover for safety.</p>
+                    </a>
+                    <!-- Product Card 5 -->
+                    <a href="#" data-section="product-airficient" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=AirFicient';" alt="AirFicient Air Permeability Tester" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">AirFicient Air Permeability Tester</h3>
+                        <p class="text-gray-600">Tests the air permeability of textiles and breathable products. It is simple to operate and provides quick, reliable results in seconds.</p>
+                    </a>
+                    <!-- Product Card 6 -->
+                    <a href="#" data-section="product-smartcrock" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartCrock';" alt="SmartCrock Crockmeter" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartCrock Crockmeter</h3>
+                        <p class="text-gray-600">Tests the color fastness of textiles under rubbing conditions. A highly automated instrument that saves $40\%$ of testing time and reduces manual influence on results.</p>
+                    </a>
+                    <!-- Product Card 7 -->
+                    <a href="#" data-section="product-smartcut" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d4.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartCut';" alt="SmartCut Fabric Sample Cutting System" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartCut Fabric Sample Cutting System</h3>
+                        <p class="text-gray-600">A smart system that can cut fabric samples within 3 minutes. It uses a unique algorithm to layout and project cutting patterns on the fabric.</p>
+                    </a>
+                    <!-- Product Card 8 -->
+                    <a href="#" data-section="product-smartdispen" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d5.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartDispen';" alt="SmartDispen Detergent Dispenser" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartDispen Detergent Dispenser</h3>
+                        <p class="text-gray-600">A sample preparation device that automatically weighs soap, dispenses water, and stirs for washing color fastness testing, ensuring high accuracy.</p>
+                    </a>
+                    <!-- Product Card 9 -->
+                    <a href="#" data-section="product-smartdry" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d6.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartDry';" alt="SmartDry Drying Rate Tester" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartDry Drying Rate Tester</h3>
+                        <p class="text-gray-600">Quickly determines the drying rate of quick-drying fabrics by simulating human sweating. Features uniform airflow control and magnetic stripe fixtures for reliable results.</p>
+                    </a>
+                    <!-- Product Card 10 -->
+                    <a href="#" data-section="product-smartfill" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d7.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartFill';" alt="SmartFill Liquid Filling Machine" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartFill Liquid Filling Machine</h3>
+                        <p class="text-gray-600">A device for washing color fastness testers that automatically prepares and dispenses soap solution according to a set bath ratio, improving efficiency and accuracy.</p>
+                    </a>
+                    <!-- Product Card 11 -->
+                    <a href="#" data-section="product-smartindale" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d8.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=Smartindale';" alt="Smartindale Abrasion & Pilling Tester" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">Smartindale Abrasion & Pilling Tester</h3>
+                        <p class="text-gray-600">Used for abrasion and pilling tests. It uses a patented digital algorithm for accurate, calibration-free Lissajous curves and one-touch switching between tests.</p>
+                    </a>
+                    <!-- Product Card 12 -->
+                    <a href="#" data-section="product-smartpull-dual" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d9.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartPull+Dual';" alt="SmartPull Tensile Tester (Dual Column)" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartPull Tensile Tester (Dual Column)</h3>
+                        <p class="text-gray-600">An AC servo-driven tensile tester for tension, compression, bending, and more. Provides stable pulling force for higher testing accuracy and powerful software.</p>
+                    </a>
+                    <!-- Product Card 13 -->
+                    <a href="#" data-section="product-smartpull-single" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+                        <img src="d10.jpg" onerror="this.onerror=null;this.src='https://placehold.co/400x160/0d47a1/ffffff?text=SmartPull+Single';" alt="SmartPull Tensile Tester (Single Column)" class="w-full h-40 object-cover rounded-xl mb-4" />
+                        <h3 class="text-2xl font-semibold text-blue-700 mb-2">SmartPull Tensile Tester (Single Column)</h3>
+                        <p class="text-gray-600">A tensile machine specially built for textiles and leather. It provides stable pulling force and high testing accuracy for various tests like tension, shearing, and peeling.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- --- Product Detail Pages --- -->
+
+        <!-- InfraDye Infrared Lab Dyeing Machine Page -->
+        <section id="product-infradye" data-section="product-infradye" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">InfraDye Infrared Lab Dyeing Machine</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <!-- FIX: Changed src="d17.jpg" to src="d14.jpg" -->
+                    <img src="d14.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=InfraDye+Detail';" alt="InfraDye Infrared Lab Dyeing Machine" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **InfraDye Infrared Lab Dyeing Machine** is a versatile and reliable instrument for laboratory dyeing. It uses advanced infrared heating technology to ensure uniform heating and consistent temperature distribution, crucial for achieving **accurate and reproducible dyeing results**. The machine supports a variety of fibers and dyeing processes, making it an essential tool for research and quality control in the textile industry. Its user-friendly interface allows for precise control over dyeing parameters, ensuring excellent color matching and efficiency.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Heating method: Infrared</li>
+                            <li>Capacity: Supports multiple beakers (typically $12-24$ stations)</li>
+                            <li>Temperature control: High-precision digital control (up to $140^{\circ}C$)</li>
+                            <li>Application: Suitable for various fibers, liquor ratios, and dyeing processes</li>
+                            <li>Voltage: $230$V/$50$Hz ($32$A)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartPull Tensile Tester (Generic) Page -->
+        <section id="product-smartpull" data-section="product-smartpull" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartPull Tensile Tester (High-Precision)</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <!-- FIX: Changed src="d18.jpg" to src="d15.jpg" -->
+                    <img src="d15.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartPull+Detail';" alt="SmartPull Tensile Tester" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartPull Tensile Tester** series provides advanced, AC servo-driven solutions for testing the strength and elongation of textiles, leather, footwear, and other materials. Equipped with high-precision **ball screws**, it ensures stable pulling force and higher testing accuracy. The powerful, multilingual software offers comprehensive data analysis, including displacement, maximum force, elongation, and stress. The system is designed with multiple safety features to protect both the instrument and the operator. It can perform a wide range of tests including **tension, compression, bending, tearing, shearing, peeling, and top-breaking**.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Key Features & Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Force Accuracy: Within $\pm1\%$ for reliable and repeatable results.</li>
+                            <li>Drive System: AC Servo motor with Ball Screw drive.</li>
+                            <li>Test Types: Tension, compression, bending, tearing, shearing, peeling, top-breaking.</li>
+                            <li>Data Output: Displacement, maximum force, elongation, stress, speed, and more.</li>
+                            <li>Standards: Applicable to international standards like ISO $9073-3$, ISO $13934-1/2$, ASTM $D5034$, ASTM $D5035$, ISO $3377-2$, and many others.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartShrink Shrinkage Rate Tester Page -->
+        <section id="product-smartshrink" data-section="product-smartshrink" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartShrink Shrinkage Rate Tester</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <!-- FIX: Changed src="d19.jpg" to src="d16.jpg" -->
+                    <img src="d16.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartShrink+Detail';" alt="SmartShrink Shrinkage Rate Tester" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartShrink Shrinkage Rate Tester** is an automatic solution for accurately measuring the dimensional stability of fabrics. It uses a sophisticated imaging system to quickly calculate the shrinkage or growth rate of a sample after washing or dry cleaning. This eliminates the need for manual measurement, **saving time and reducing human error**. The device provides precise and repeatable results, making it an indispensable tool for textile quality control and ensuring products meet industry standards for size and fit.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Measuring method: Automatic imaging analysis</li>
+                            <li>Test function: Measures shrinkage rate and dimensional change</li>
+                            <li>Efficiency: Reduces test time and manual labor</li>
+                            <li>Accuracy: High-precision and repeatable results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AirBurst Bursting Strength Tester Page -->
+        <section id="product-airburst" data-section="product-airburst" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">AirBurst Bursting Strength Tester</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d1.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=AirBurst+Detail';" alt="AirBurst Bursting Strength Tester Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **AirBurst Bursting Strength Tester** is a pneumatic instrument designed for testing textiles, films, paper, foam, and plastics. It offers a user-friendly experience with **one-button testing** and supports customizable test modes to fit various needs. Its clamping pressure is precisely adjustable for different samples. For enhanced safety, it features an **automatic protective cover** and can automatically recognize the test cup to prevent errors. The compact, modular design ensures easy calibration and maintenance. The device runs on an **Android operating system**, and for more advanced features, IoT configuration is available.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Power: AC $220$V $50$HZ</li>
+                            <li>Weight: $120$kg</li>
+                            <li>Maximum air pressure: $1.4$ MPa</li>
+                            <li>Measurement accuracy: $\pm2\%FS$</li>
+                            <li>Measuring range: $0.01\sim1.4$ Mpa</li>
+                            <li>Maximum expansion height: $70\pm1$ mm</li>
+                            <li>Operation System: Android (IoT configuration available)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AirFicient Air Permeability Tester Page -->
+        <section id="product-airficient" data-section="product-airficient" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">AirFicient Air Permeability Tester</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d2.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=AirFicient+Detail';" alt="AirFicient Air Permeability Tester Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **AirFicient Air Permeability Tester** is designed to measure the air permeability of various textiles, including technical textiles, nonwovens, and other breathable products like sponge paper. Its operation is simple and quick, delivering reliable results in just seconds. The instrument automatically recognizes the test fixture head, allowing for seamless testing. With high-quality, maintenance-free components and a self-designed calibration system, it ensures **repeatable and accurate results**. This instrument is trusted by major brands like **Canada Goose** and is used for testing automotive interiors by the world's No. $1$ electric car brand.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Power: $220/110$V $50/60$Hz</li>
+                            <li>Weight: $125$kg</li>
+                            <li>Test Mode: Automatic (with auto-recognition of test head)</li>
+                            <li>Measurement units: mm/s, m/s, l/m$^2$/s, ft$^3$/min/ft$^2$, cfm, cm$^3$/s/cm$^2$, l/s/cm$^2$, l/m$^2$/min, m$^3$/min, dm$^3$/s, m$^3$/s/m$^2$, m$^3$/min/m$^2$, m$^3$/h/m$^2$, ft$^3$/s/ft$^2$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartCrock Crockmeter Page -->
+        <section id="product-smartcrock" data-section="product-smartcrock" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartCrock Crockmeter</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d3.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartCrock+Detail';" alt="SmartCrock Crockmeter Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartCrock Crockmeter** is a highly automated instrument for testing the **color fastness** of textiles and leather under wet and dry rubbing conditions. Its automation reduces manual influence on test results and can save up to **$40\%$ of sampling and testing time**. The device features a **patented sample clamping and stretching mechanism** that prevents wrinkles on knitted samples, ensuring more accurate and reproducible tests. It also allows for both wet and dry friction tests to be performed in a single, efficient process.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Power: $220/110$V $50/60$ Hz</li>
+                            <li>Weight: $23$kg</li>
+                            <li>Friction head: diameter $16$ mm</li>
+                            <li>Vertical pressure: $9N \pm 10\%$</li>
+                            <li>Friction stroke: $104$ mm</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartCut Fabric Sample Cutting System Page -->
+        <section id="product-smartcut" data-section="product-smartcut" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartCut Fabric Sample Cutting System</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d4.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartCut+Detail';" alt="SmartCut Fabric Sample Cutting System Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartCut Fabric Sample Cutting System** can complete fabric sampling in just **$3$ minutes**. It is equipped with smart software that allows users to select various cutting patterns and save them as templates. Using a unique algorithm, it lays out the sample graphics and **projects them directly onto the fabric** for precision cutting. The system is suitable for dozens of tests including pilling, tearing strength, water repellency, and tensile strength, and supports a wide range of international standards. Fabric is held in place using **vacuum adsorption** to ensure flatness.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Cutting accuracy: $\pm0.1$ mm</li>
+                            <li>Repeatability: $\pm0.01$ mm</li>
+                            <li>Maximum cutting thickness: $7$ mm</li>
+                            <li>Fabric fixing method: Vacuum adsorption</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartDispen Detergent Dispenser Page -->
+        <section id="product-smartdispen" data-section="product-smartdispen" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartDispen Detergent Dispenser</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d5.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartDispen+Detail';" alt="SmartDispen Detergent Dispenser Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartDispen Detergent Dispenser** is a sample preparation device for soaping washing color fastness testing, significantly improving accuracy and efficiency. It automatically weighs soap, dispenses water, heats, and stirs the solution according to the strict bath ratio. This **three-station design** can prepare three different samples simultaneously and independently, reducing manual error and making the test more reliable and faster.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Balance: weighing limit $600$g, accuracy $\pm0.01$g</li>
+                            <li>Soap tank: working volume $5000$ml $\times 3$</li>
+                            <li>Liquid output accuracy: $1$ ml $\pm 5\%$</li>
+                            <li>Temperature control range: $0\sim60^{\circ}C$, precision $\pm1^{\circ}C$</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartDry Drying Rate Tester Page -->
+        <section id="product-smartdry" data-section="product-smartdry" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartDry Drying Rate Tester</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d6.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartDry+Detail';" alt="SmartDry Drying Rate Tester Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartDry Drying Rate Tester** quickly determines the drying rate of quick-drying fabrics by simulating human sweating. Equipped with high-precision sensors and a precision dripping device, it ensures a realistic and repeatable test environment. The **unique uniform airflow control** and magnetic stripe fixture for sample pressing make the results highly reliable and consistent with international third-party test organizations.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Airflow: $0.5\sim3.5$ m/s $\pm0.1$ m/s</li>
+                            <li>Heating temperature: $25\sim40^{\circ}C \pm0.5^{\circ}C$</li>
+                            <li>Test time: Completed in a few minutes</li>
+                            <li>Power: $220/110$V $50/60$Hz</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartFill Liquid Filling Machine Page -->
+        <section id="product-smartfill" data-section="product-smartfill" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartFill Liquid Filling Machine</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d7.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartFill+Detail';" alt="SmartFill Liquid Filling Machine Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartFill Liquid Filling Machine** is an ideal companion for washing color fastness testers. It automatically prepares and heats the soap solution according to a preset bath ratio and dispenses it, along with the correct number of steel balls, directly into the test cup. This automated process ensures high accuracy, prevents delays, and can save significant labor costs. It even supports WIFI connectivity for remote operation and monitoring via a smartphone app.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Balance: weighing limit $600$g, accuracy $\pm0.01$g</li>
+                            <li>Soap tank volume: $6500$ml (with auto-refill)</li>
+                            <li>Liquid output accuracy: $1$ml $\pm 5\%$</li>
+                            <li>Power: $220/110$V $50/60$Hz</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smartindale Abrasion & Pilling Tester Page -->
+        <section id="product-smartindale" data-section="product-smartindale" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">Smartindale Abrasion & Pilling Tester</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d8.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=Smartindale+Detail';" alt="Smartindale Abrasion & Pilling Tester Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **Smartindale Abrasion & Pilling Tester** uses a patented digital algorithm to generate the precise Lissajous curve for friction testing, eliminating the need for mechanical calibration. Its key advantage is the **one-touch switching** between abrasion and pilling test modes directly on the control panel, significantly improving lab efficiency by removing the need to change physical pins or covers. It is a highly reliable instrument proven by ultra-high-intensity testing.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Key Features</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Test Modes: Abrasion, Pilling, and Straightness</li>
+                            <li>Lissajous Curve: Calibration-free digital algorithm</li>
+                            <li>Efficiency: One-touch mode switching</li>
+                            <li>Power: $220/110$V $50/60$Hz</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartPull Tensile Tester (Dual Column) Page -->
+        <section id="product-smartpull-dual" data-section="product-smartpull-dual" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartPull Tensile Tester (Dual Column)</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d9.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartPull+Dual+Detail';" alt="SmartPull Tensile Tester (Dual Column) Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartPull Dual Column Tensile Tester** is an AC servo-driven powerhouse, utilizing **ball screws** to deliver exceptionally stable pulling force and superior testing accuracy (within $\pm1\%$). Its robust structure is perfect for tests requiring high stability across a variety of materials. The comprehensive software outputs multiple indices, including displacement, maximum force, elongation, and stress, ensuring high data reliability. It supports a full range of tests, including tension, compression, bending, and peeling.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Key Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Drive System: AC Servo motor, Ball Screw</li>
+                            <li>Force Accuracy: Within $\pm1\%$</li>
+                            <li>Supported Tests: Tension, compression, bending, tearing, shearing, peeling, top-breaking</li>
+                            <li>Standards: Complies with numerous ISO, ASTM, and GB/T standards.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SmartPull Tensile Tester (Single Column) Page -->
+        <section id="product-smartpull-single" data-section="product-smartpull-single" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">&larr; Back to Products</a>
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">SmartPull Tensile Tester (Single Column)</h2>
+                <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
+                    <img src="d10.jpg" onerror="this.onerror=null;this.src='https://placehold.co/800x400/0d47a1/ffffff?text=SmartPull+Single+Detail';" alt="SmartPull Tensile Tester (Single Column) Detail" class="w-full h-auto rounded-xl mb-6 shadow-md" />
+                    <p class="text-lg text-gray-600 leading-relaxed mb-6">
+                        The **SmartPull Single Column Tensile Tester** is a specialized, AC servo-driven machine optimized for textiles and leather. It offers stable pulling force and high testing accuracy for a variety of critical textile tests such as tension, shearing, and peeling. Its compact design and user-friendly interface make it a perfect fit for smaller labs while maintaining the high reliability and comprehensive data output of the SmartPull series.
+                    </p>
+                    <div class="mt-8 border-t border-gray-200 pt-6">
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Key Specifications</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li>Max Travel: $800$mm</li>
+                            <li>Testing Capacity: $250$kg (or $500$kg optional)</li>
+                            <li>Test Level: Class 1</li>
+                            <li>Standards: Applicable to international standards like ISO $9073-3$ and ASTM $D5034$.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Services Section -->
+        <section id="services" data-section="services" class="section-content hidden py-16 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-12">Our Services</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                        <div class="text-blue-600 text-5xl mb-4">🛠️</div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Installation & Training</h3>
+                        <p class="text-gray-600">Comprehensive on-site installation and personalized training programs to ensure your team can operate the machinery efficiently and accurately.</p>
+                    </div>
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                        <div class="text-blue-600 text-5xl mb-4">⚙️</div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Maintenance & Calibration</h3>
+                        <p class="text-gray-600">Scheduled preventive maintenance and accredited calibration services to maintain instrument precision and compliance with international standards.</p>
+                    </div>
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                        <div class="text-blue-600 text-5xl mb-4">💻</div>
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-3">Digital Integration (IoT/LIMS)</h3>
+                        <p class="text-gray-600">Expert services to integrate your new instruments with existing Lab Management Systems (LIMS/ERP) via IoT for fully digitalized testing workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+       <section id="contact" data-section="contact" class="section-content hidden py-16 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center text-blue-800 mb-12">Contact Us</h2>
+        <div class="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">Get in Touch</h3>
+                    <p class="text-gray-600 mb-4">We are ready to assist you with any inquiries regarding textile testing machinery and digital lab solutions.</p>
+                    <div class="space-y-3">
+                        <p class="flex items-center text-gray-700">
+                            <span class="font-bold w-20">Email:</span> info@angkorcal.com
+                        </p>
+                        <p class="flex items-center text-gray-700">
+                            <span class="font-bold w-20">Phone:</span> +855 017 224 772
+                        </p>
+                        <p class="text-gray-700">
+                            <span class="font-bold block w-20">Office:</span> Phnom Penh, Cambodia
+                        </p>
+                        <!-- Facebook link with icon -->
+                        <p class="flex items-center text-gray-700">
+                            <span class="font-bold w-20"></span>
+                            <a href="https://www.facebook.com/share/1CA7K4Resm/" target="_blank" 
+                               class="flex items-center text-blue-600 hover:text-blue-800 space-x-2">
+                                <i class="fab fa-facebook fa-lg"></i>
+                                <span>Follow us</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Angkor-Cal Textile Machine. All rights reserved. | <a href="#" data-section="profile" class="nav-link text-blue-400 hover:text-blue-200">Company Profile</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section-content');
+            const navLinks = document.querySelectorAll('.nav-link, a[data-section]');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuToggle = document.getElementById('menu-toggle');
+
+            // --- Navigation Logic ---
+            function showSection(targetId) {
+                // Hide all sections
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show the target section
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+            }
+
+            // Set initial section to 'home'
+            showSection('home');
+
+            // Add click handlers for navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('data-section');
+
+                    // If clicking a product link from the list, scroll up immediately
+                    if (targetId.startsWith('product-')) {
+                        // Wait for the next tick to ensure the new section is visible before scrolling
+                        setTimeout(() => {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }, 50);
+                    } else if (targetId === 'home') {
+                        // For home, ensure we scroll to the top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+
+                    showSection(targetId);
+
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Mobile menu toggle
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+
+            // --- Carousel Logic (for Hero Section) ---
+            const carousel = document.getElementById('image-carousel');
+            const carouselItems = carousel.querySelectorAll('.carousel-item');
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                carouselItems.forEach((item, index) => {
+                    item.classList.remove('active');
+                    if (index === currentIndex) {
+                        item.classList.add('active');
+                    }
+                });
+
+                currentIndex = (currentIndex + 1) % carouselItems.length;
+            }
+
+            // Start carousel rotation every 5 seconds
+            setInterval(updateCarousel, 5000);
+        });
+    </script>
+</body>
+</html>
