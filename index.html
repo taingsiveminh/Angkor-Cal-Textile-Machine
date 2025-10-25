@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Angkor-Cal Textile Machine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,59 +12,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&display=swap" rel="stylesheet">
     <!-- ✅ Font Awesome (for Facebook icon) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-   
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Apply Battambang font specifically for Khmer text to ensure it looks right */
-        .khmer-text {
-            font-family: 'Battambang', sans-serif;
-        }
-        .product-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer; /* Indicate it's clickable */
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .carousel-item {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            z-index: -1;
-        }
-        .carousel-item.active {
-            opacity: 1;
-        }
-        /* Style for the custom message box instead of alert() */
-        #message-box {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            padding: 24px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            max-width: 90vw;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        #message-box.show {
-            opacity: 1;
-            visibility: visible;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .khmer-text { font-family: 'Battambang', sans-serif; }
+        .product-card { transition: transform .3s ease, box-shadow .3s ease; cursor: pointer; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.1); }
+        .carousel-item { position:absolute; width:100%; height:100%; top:0; left:0; background-size:cover; background-position:center; opacity:0; transition:opacity 1.5s ease-in-out; z-index:-1; }
+        .carousel-item.active { opacity:1; }
+        #message-box { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); z-index:1000; padding:24px; background:#fff; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,.2); max-width:90vw; text-align:center; opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s ease; }
+        #message-box.show { opacity:1; visibility:visible; }
+        /* simple image fallback */
+        .img-fallback { background:linear-gradient(135deg,#f3f4f6,#e5e7eb); display:flex; align-items:center; justify-content:center; color:#6b7280; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -81,7 +40,7 @@
             <!-- Website Logo and Name -->
             <a href="#" data-section="home" class="flex items-center space-x-2">
                 <img src="d13logo.jpg" alt="Angkor-Cal Logo" class="h-10 w-10 rounded-full"/>
-                <span id="nav-title" class="text-xl md:text-2xl font-bold text-gray-800">Angkor-Cali</span>
+                <span id="nav-title" class="text-xl md:text-2xl font-bold text-gray-800" data-lang-key="navTitle">Angkor-Cali</span>
             </a>
 
             <!-- Desktop Menu & Language Switcher -->
@@ -90,23 +49,17 @@
                 <a href="#" data-section="profile" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navProfile">Profile</a>
                 <a href="#" data-section="products" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navProducts">Products</a>
                 <a href="#" data-section="services" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navServices">Our Services</a>
+                <!-- ✅ New Consumables nav item -->
+                <a href="#" data-section="consumables" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navConsumables">Consumables</a>
                 <a href="#" data-section="contact" class="nav-link text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navContact">Contact Us</a>
-                
-                <!-- Language Switcher Button -->
-                <button id="lang-toggle" class="bg-gray-100 text-gray-600 font-medium py-2 px-3 rounded-lg hover:bg-blue-100 hover:text-blue-600 transition duration-300 text-sm">
-                    KH/EN
-                </button>
+                <button id="lang-toggle" class="bg-gray-100 text-gray-600 font-medium py-2 px-3 rounded-lg hover:bg-blue-100 hover:text-blue-600 transition duration-300 text-sm">KH/EN</button>
             </div>
 
             <!-- Mobile Menu Button -->
             <div class="flex items-center md:hidden space-x-4">
-                <button id="lang-toggle-mobile" class="bg-gray-100 text-gray-600 font-medium py-1 px-2 rounded-lg hover:bg-blue-100 hover:text-blue-600 transition duration-300 text-sm">
-                    KH/EN
-                </button>
-                <button id="menu-toggle" class="text-gray-600 hover:text-blue-600 focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
+                <button id="lang-toggle-mobile" class="bg-gray-100 text-gray-600 font-medium py-1 px-2 rounded-lg hover:bg-blue-100 hover:text-blue-600 transition duration-300 text-sm">KH/EN</button>
+                <button id="menu-toggle" class="text-gray-600 hover:text-blue-600 focus:outline-none" aria-label="Toggle Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
                 </button>
             </div>
         </div>
@@ -117,29 +70,25 @@
             <a href="#" data-section="profile" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navProfile">Profile</a>
             <a href="#" data-section="products" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navProducts">Products</a>
             <a href="#" data-section="services" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navServices">Our Services</a>
+            <!-- ✅ New Consumables in mobile menu -->
+            <a href="#" data-section="consumables" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navConsumables">Consumables</a>
             <a href="#" data-section="contact" class="nav-link block py-2 text-gray-600 hover:text-blue-600 transition duration-300" data-lang-key="navContact">Contact Us</a>
         </div>
     </nav>
 
-    <!-- Main Content Sections -->
+    <!-- Main Content -->
     <main class="pt-24 pb-12">
-
         <!-- Home Section (Hero) -->
         <section id="home" data-section="home" class="section-content bg-blue-600 text-white py-24 md:py-32 overflow-hidden relative">
-            <!-- Background Carousel -->
             <div id="image-carousel" class="absolute inset-0 z-0">
-                <div class="carousel-item active" style="background-image: url('https://chiuvention.com/wp-content/uploads/2025/04/smart-textile-lab.webp');"></div>
-                <div class="carousel-item" style="background-image: url('https://chiuvention.com/wp-content/uploads/2025/03/textile_testing_machine_agent.webp');"></div>
-                <div class="carousel-item" style="background-image: url('https://chiuvention.com/wp-content/uploads/2025/07/蒙版组-47@2x.jpg');"></div>
+                <div class="carousel-item active" style="background-image:url('https://chiuvention.com/wp-content/uploads/2025/04/smart-textile-lab.webp');"></div>
+                <div class="carousel-item" style="background-image:url('https://chiuvention.com/wp-content/uploads/2025/03/textile_testing_machine_agent.webp');"></div>
+                <div class="carousel-item" style="background-image:url('https://chiuvention.com/wp-content/uploads/2025/07/%E8%92%99%E7%89%88%E7%BB%84-47@2x.jpg');"></div>
             </div>
-
-            <!-- Main Hero Content -->
-            <div class="container mx-auto text-center px-6 relative z-10 bg-black bg-opacity-30 p-4 rounded-xl">
+            <div class="container mx-auto text-center px-6 relative z-10 bg-black/30 p-4 rounded-xl">
                 <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold mb-4" data-lang-key="heroTitle">Innovative Textile Testing Solutions</h1>
                 <p id="hero-subtitle" class="text-lg md:text-xl max-w-2xl mx-auto mb-8" data-lang-key="heroSubtitle">Providing high-quality and reliable machinery for the textile industry.</p>
-                <a href="#" data-section="products" class="nav-link bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105" data-lang-key="heroButton">
-                    Explore Products
-                </a>
+                <a href="#" data-section="products" class="nav-link bg-white text-blue-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-100 transition duration-300 transform hover:scale-105" data-lang-key="heroButton">Explore Products</a>
             </div>
         </section>
 
@@ -148,12 +97,8 @@
             <div class="container mx-auto px-6">
                 <h2 id="profile-heading" class="text-4xl font-bold text-center text-blue-800 mb-12" data-lang-key="profileTitle">Company Profile</h2>
                 <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto text-center">
-                    <p id="profile-content-1" class="text-lg text-gray-600 leading-relaxed" data-lang-key="profileContent1">
-                        Angkor-Cal Textile Machine is a leading provider of advanced textile testing equipment. We specialize in innovative and highly automated solutions that improve testing accuracy and efficiency. Our instruments are designed with user-friendliness and reliability in mind, helping laboratories and businesses achieve more accurate and reproducible results. We are committed to supporting our customers with intelligent technology and exceptional service.
-                    </p>
-                    <p id="profile-content-2" class="text-lg text-gray-600 leading-relaxed mt-4" data-lang-key="profileContent2">
-                        We embrace the **Digital Future of Textile Testing** by developing smart instruments that combine cutting-edge **RFID, visual inspection, and IoT technologies with AI algorithms**. Our equipment is designed to connect seamlessly with modern lab management systems (like SmarTexLab, ERP, or LIMS) to achieve fully digitalized testing and production, making testing **transparent, faster, and more accurate**.
-                    </p>
+                    <p id="profile-content-1" class="text-lg text-gray-600 leading-relaxed" data-lang-key="profileContent1">Angkor-Cal Textile Machine is a leading provider of advanced textile testing equipment...</p>
+                    <p id="profile-content-2" class="text-lg text-gray-600 leading-relaxed mt-4" data-lang-key="profileContent2">We embrace the <b>Digital Future of Textile Testing</b>...</p>
                 </div>
             </div>
         </section>
@@ -162,9 +107,7 @@
         <section id="products" data-section="products" class="section-content hidden py-16">
             <div class="container mx-auto px-6">
                 <h2 id="products-heading" class="text-4xl font-bold text-center text-blue-800 mb-12" data-lang-key="productsTitle">Our Products</h2>
-                <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Product Cards will be dynamically generated here by JavaScript -->
-                </div>
+                <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"></div>
             </div>
         </section>
 
@@ -174,53 +117,45 @@
                 <a href="#" data-section="products" class="nav-link text-blue-600 hover:underline mb-4 inline-block">
                     <span id="detail-back-button" data-lang-key="detailBackButton">&larr; Back to Products</span>
                 </a>
-                <div id="detail-content" class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
-                    <!-- Dynamic Content will be injected here -->
-                </div>
+                <div id="detail-content" class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto"></div>
             </div>
         </section>
 
-        <!-- Services Section (Placeholder for translation) -->
+        <!-- Services Section -->
         <section id="services" data-section="services" class="section-content hidden py-16 bg-gray-100">
             <div class="container mx-auto px-6">
                 <h2 id="services-heading" class="text-4xl font-bold text-center text-blue-800 mb-12" data-lang-key="servicesTitle">Our Services</h2>
                 <div class="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto text-center">
-                    <p id="services-content-1" class="text-lg text-gray-600 leading-relaxed" data-lang-key="servicesContent1">
-                        We offer comprehensive technical support, installation, calibration, and training services for all our textile testing machines. Our commitment is to ensure your equipment operates at peak performance.
-                    </p>
-                    <p id="services-content-2" class="text-lg text-gray-600 leading-relaxed mt-4" data-lang-key="servicesContent2">
-                        From initial consultation to after-sales maintenance, our expert team is dedicated to providing swift and reliable service to minimize your downtime and maximize your lab efficiency.
-                    </p>
+                    <p id="services-content-1" class="text-lg text-gray-600 leading-relaxed" data-lang-key="servicesContent1">We offer comprehensive technical support...</p>
+                    <p id="services-content-2" class="text-lg text-gray-600 leading-relaxed mt-4" data-lang-key="servicesContent2">From initial consultation to after-sales maintenance...</p>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section (Placeholder for translation) -->
+        <!-- ✅ NEW: Consumables Section -->
+        <section id="consumables" data-section="consumables" class="section-content hidden py-16">
+            <div class="container mx-auto px-6">
+                <h2 class="text-4xl font-bold text-center text-blue-800 mb-3" data-lang-key="consumablesTitle">Lab Consumables</h2>
+                <p class="text-center text-gray-600 mb-10" data-lang-key="consumablesIntro">Standardized fabrics, detergents, scales and accessories for textile testing.</p>
+                <div id="consumables-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
         <section id="contact" data-section="contact" class="section-content hidden py-16">
             <div class="container mx-auto px-6">
                 <h2 id="contact-heading" class="text-4xl font-bold text-center text-blue-800 mb-12" data-lang-key="contactTitle">Contact Us</h2>
                 <div class="bg-white rounded-xl shadow-lg p-8 max-w-lg mx-auto">
-                    <p id="contact-info-1" class="text-lg text-gray-700 mb-4" data-lang-key="contactInfo1">
-                        **Address:** Phnom Penh, Cambodia (Office location will be provided upon request)
-                    </p>
-                    <p id="contact-info-2" class="text-lg text-gray-700 mb-4" data-lang-key="contactInfo2">
-                        **Email:** info@angkorcal.com
-                    </p>
-                    <p id="contact-info-3" class="text-lg text-gray-700 mb-6" data-lang-key="contactInfo3">
-                        **Phone:** (+855) 017 224 772
-                    </p>
+                    <p id="contact-info-1" class="text-lg text-gray-700 mb-4" data-lang-key="contactInfo1"><b>Address:</b> Phnom Penh, Cambodia (Office location will be provided upon request)</p>
+                    <p id="contact-info-2" class="text-lg text-gray-700 mb-4" data-lang-key="contactInfo2"><b>Email:</b> info@angkorcal.com</p>
+                    <p id="contact-info-3" class="text-lg text-gray-700 mb-6" data-lang-key="contactInfo3"><b>Phone:</b> (+855) 017 224 772</p>
                     <div class="flex justify-center space-x-6">
-                        <a href="https://www.facebook.com/share/1CA7K4Resm/" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-300">
-                            <i class="fab fa-facebook-square text-4xl"></i>
-                        </a>
-                        <a href="mailto:info@angkorcal.com" class="text-red-600 hover:text-red-800 transition duration-300">
-                            <i class="fas fa-envelope-square text-4xl"></i>
-                        </a>
+                        <a href="https://www.facebook.com/share/1CA7K4Resm/" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-300"><i class="fab fa-facebook-square text-4xl"></i></a>
+                        <a href="mailto:info@angkorcal.com" class="text-red-600 hover:text-red-800 transition duration-300"><i class="fas fa-envelope-square text-4xl"></i></a>
                     </div>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
@@ -230,427 +165,225 @@
         </div>
     </footer>
 
+<script>
+let currentLang = 'en';
 
-    <script>
-        // --- 1. LANGUAGE & PRODUCT DATA ---
-        let currentLang = 'en';
+// --- PRODUCT CARDS (existing minimal to keep demo working) ---
+const PRODUCTS = {
+  infradye:{id:'infradye', image:'d17.jpg', detailImage:'d17.jpg'},
+  'smartpull-dual':{id:'smartpull-dual', image:'d18.jpg', detailImage:'d18.jpg'},
+  smartshrink:{id:'smartshrink', image:'d19.jpg', detailImage:'d19.jpg'},
+  hydroburst:{id:'hydroburst', image:'d3.jpg', detailImage:'d3.jpg'},
+  airficient:{id:'airficient', image:'d1.jpg', detailImage:'d1.jpg'},
+  smartcrock:{id:'smartcrock', image:'d20.jpg', detailImage:'d20.jpg'},
+  smartcut:{id:'smartcut', image:'d6.jpg', detailImage:'d6.jpg'},
+  smartdispen:{id:'smartdispen', image:'d21.jpg', detailImage:'d21.jpg'},
+  smartdry:{id:'smartdry', image:'d7.jpg', detailImage:'d7.jpg'},
+  smartfill:{id:'smartfill', image:'d9.jpg', detailImage:'d9.jpg'},
+  smartindale:{id:'smartindale', image:'d8.jpg', detailImage:'d8.jpg'},
+  'smartpull-single':{id:'smartpull-single', image:'d10.jpg', detailImage:'d10.jpg'},
+  atmoexplorer:{id:'atmoexplorer', image:'d2.jpg', detailImage:'d2.jpg'},
+  innoflex:{id:'innoflex', image:'d4.jpg', detailImage:'d4.jpg'},
+  propress:{id:'propress', image:'d5.jpg', detailImage:'d5.jpg'},
+  washtrue:{id:'washtrue', image:'d22.jpg', detailImage:'d22.jpg'},
+  elmenguide:{id:'elmenguide', image:'d12.jpg', detailImage:'d12.jpg'}
+};
 
-        // Base product data, including a unique ID for dynamic detail generation
-        const PRODUCTS = {
-            'infradye': {
-                id: 'infradye',
-                image: 'd17.jpg',
-                detailImage: 'd17.jpg',
-            },
-            'smartpull-dual': {
-                id: 'smartpull-dual',
-                image: 'd18.jpg',
-                detailImage: 'd18.jpg',
-            },
-            'smartshrink': {
-                id: 'smartshrink',
-                image: 'd19.jpg',
-                detailImage: 'd19.jpg',
-            },
-            'hydroburst': {
-                id: 'hydroburst',
-                image: 'd3.jpg',
-                detailImage: 'd3.jpg',
-            },
-            'airficient': {
-                id: 'airficient',
-                image: 'd1.jpg',
-                detailImage: 'd1.jpg',
-            },
-            'smartcrock': {
-                id: 'smartcrock',
-                image: 'd20.jpg',
-                detailImage: 'd20.jpg',
-            },
-            'smartcut': {
-                id: 'smartcut',
-                image: 'd6.jpg',
-                detailImage: 'd6.jpg',
-            },
-            'smartdispen': {
-                id: 'smartdispen',
-                image: 'd21.jpg',
-                detailImage: 'd21.jpg',
-            },
-            'smartdry': {
-                id: 'smartdry',
-                image: 'd7.jpg',
-                detailImage: 'd7.jpg',
-            },
-            'smartfill': {
-                id: 'smartfill',
-                image: 'd9.jpg',
-                detailImage: 'd9.jpg',
-            },
-            'smartindale': {
-                id: 'smartindale',
-                image: 'd8.jpg',
-                detailImage: 'd8.jpg',
-            },
-            'smartpull-single': {
-                id: 'smartpull-single',
-                image: 'd10.jpg',
-                detailImage: 'd10.jpg',
-            },
-            'atmoexplorer': {
-                id: 'atmoexplorer',
-                image: 'd2.jpg',
-                detailImage: 'd2.jpg',
-            },
-            'innoflex': {
-                id: 'innoflex',
-                image: 'd4.jpg',
-                detailImage: 'd4.jpg',
-            },
-            'propress': {
-                id: 'propress',
-                image: 'd5.jpg',
-                detailImage: 'd5.jpg',
-            },
-            'washtrue': {
-                id: 'washtrue',
-                image: 'd22.jpg',
-                detailImage: 'd22.jpg',
-            },
-            'elmenguide': {
-                id: 'elmenguide',
-                image: 'd12.jpg',
-                detailImage: 'd12.jpg',
-            },
-        };
+// --- ✅ CONSUMABLES DATA ---
+const CONSUMABLES = [
+  { id:'c1',  title:'AATCC Grey Scale (Color Change & Staining)',     image:'c1.jpg' },
+  { id:'c2',  title:'SDC Cotton Lawn',                                 image:'c3.jpg' },
+  { id:'c3',  title:'SDC Multifiber DW',                               image:'c2.jpg' },
+  { id:'c4',  title:'SDC Phenolic Yellowing Control Fabric',           image:'c4.jpg' },
+  { id:'c5',  title:'Woven Felt Pads',                                  image:'c5.jpg' },
+  { id:'c6',  title:'SDCE Blue Wool',                                   image:'c6.jpg' },
+  { id:'c7',  title:'SDCE ECE Non-Phosphate Detergent',                 image:'c7.jpg' },
+  { id:'c8',  title:'TAED 92% (Tetraacetylethylenediamine)',           image:'c8.jpg' },
+  { id:'c9',  title:'SDCE Cotton Ballast',                              image:'c9.jpg' },
+  { id:'c10', title:'SDCE Grey Scales for Assessing Staining',          image:'c10.jpg' },
+  { id:'c11', title:'SDCE Humidity Control Fabric',                     image:'c11.jpg' },
+  { id:'c12', title:'Nylon F03 (Polyamide)',                            image:'c12.jpg' },
+  { id:'c13', title:'ISO 105/A01 Standard Depths (Set)',                image:'c13.jpg' },
+  { id:'c14', title:'SDC Polyetherurethane Foam',                       image:'c14.jpg' },
+  { id:'c15', title:'Tide Detergent',                                   image:'c15.jpg' },
+  { id:'c16', title:'AATCC Multifibre Test Fabric',                     image:'c16.jpg' }
+];
 
-        const TRANSLATIONS = {
-            // --- GENERAL & NAVIGATION ---
-            navTitle: { en: 'Angkor-Cali', km: 'អង្គរ-កាលី' },
-            navHome: { en: 'Home', km: 'ទំព័រដើម' },
-            navProfile: { en: 'Profile', km: 'ប្រវត្តិក្រុមហ៊ុន' },
-            navProducts: { en: 'Products', km: 'ផលិតផល' },
-            navServices: { en: 'Our Services', km: 'សេវាកម្មរបស់យើង' },
-            navContact: { en: 'Contact Us', km: 'ទំនាក់ទំនង' },
-            heroTitle: { en: 'Innovative Textile Testing Solutions', km: 'ដំណោះស្រាយសាកល្បងវាយនភ័ណ្ឌប្រកបដោយភាពច្នៃប្រឌិត' },
-            heroSubtitle: { en: 'Providing high-quality and reliable machinery for the textile industry.', km: 'ផ្គត់ផ្គង់គ្រឿងម៉ាស៊ីនដែលមានគុណភាពខ្ពស់ និងអាចទុកចិត្តបានសម្រាប់ឧស្សាហកម្មវាយនភ័ណ្ឌ។' },
-            heroButton: { en: 'Explore Products', km: 'ស្វែងយល់ពីផលិតផល' },
-            profileTitle: { en: 'Company Profile', km: 'ប្រវត្តិក្រុមហ៊ុន' },
-            productsTitle: { en: 'Our Products', km: 'ផលិតផលរបស់យើង' },
-            servicesTitle: { en: 'Our Services', km: 'សេវាកម្មរបស់យើង' },
-            contactTitle: { en: 'Contact Us', km: 'ទំនាក់ទំនងមកយើង' },
-            detailBackButton: { en: '← Back to Products', km: '← ត្រឡប់ទៅផលិតផលវិញ' },
-            footerText: { en: '@copy; 2024 Angkor-Cal Textile Machine. All rights reserved.', km: '&copy; 2024 ម៉ាស៊ីនវាយនភ័ណ្ឌ អង្គរ-កាលី។ រក្សាសិទ្ធិគ្រប់យ៉ាង។' },
-            servicesContent1: { en: 'We offer comprehensive technical support, installation, calibration, and training services for all our textile testing machines. Our commitment is to ensure your equipment operates at peak performance.', km: 'យើងផ្តល់ជូននូវការគាំទ្រផ្នែកបច្ចេកទេស ការដំឡើង ការក្រិត និងសេវាកម្មបណ្តុះបណ្តាលដ៏ទូលំទូលាយសម្រាប់ម៉ាស៊ីនសាកល្បងវាយនភ័ណ្ឌទាំងអស់របស់យើង។ ការប្តេជ្ញាចិត្តរបស់យើងគឺធានាថាឧបករណ៍របស់អ្នកដំណើរការប្រកបដោយប្រសិទ្ធភាពខ្ពស់បំផុត។' },
-            servicesContent2: { en: 'From initial consultation to after-sales maintenance, our expert team is dedicated to providing swift and reliable service to minimize your downtime and maximize your lab efficiency.', km: 'ចាប់ពីការពិគ្រោះយោបល់ដំបូងរហូតដល់ការថែទាំក្រោយពេលលក់ ក្រុមអ្នកជំនាញរបស់យើងបានប្តេជ្ញាចិត្តក្នុងការផ្តល់សេវាកម្មរហ័ស និងអាចទុកចិត្តបាន ដើម្បីកាត់បន្ថយពេលវេលារងចាំរបស់អ្នក និងបង្កើនប្រសិទ្ធភាពមន្ទីរពិសោធន៍របស់អ្នក។' },
-            contactInfo1: { en: '**Address:** Phnom Penh, Cambodia (Office location will be provided upon request)', km: '**អាសយដ្ឋាន៖** ភ្នំពេញ កម្ពុជា (ទីតាំងការិយាល័យនឹងត្រូវផ្តល់ជូនតាមការស្នើសុំ)' },
-            contactInfo2: { en: '**Email:** info@angkorcal.com', km: '**អ៊ីមែល៖** info@angkorcal.com' },
-            contactInfo3: { en: '**Phone:** (+855) 17 224 772', km: '**ទូរស័ព្ទ៖** (+855) 17 224 772' },
-            
-            // --- PROFILE CONTENT ---
-            profileContent1: {
-                en: 'Angkor-Cal Textile Machine is a leading provider of advanced textile testing equipment. We specialize in innovative and highly automated solutions that improve testing accuracy and efficiency. Our instruments are designed with user-friendliness and reliability in mind, helping laboratories and businesses achieve more accurate and reproducible results. We are committed to supporting our customers with intelligent technology and exceptional service.',
-                km: 'អង្គរ-កាលី ម៉ាស៊ីនវាយនភ័ណ្ឌ គឺជាអ្នកផ្គត់ផ្គង់ឈានមុខគេផ្នែកឧបករណ៍សាកល្បងវាយនភ័ណ្ឌកម្រិតខ្ពស់។ យើងមានឯកទេសក្នុងដំណោះស្រាយប្រកបដោយភាពច្នៃប្រឌិត និងស្វ័យប្រវត្តិកម្មខ្ពស់ ដែលបង្កើនភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពនៃការធ្វើតេស្ត។ ឧបករណ៍របស់យើងត្រូវបានរចនាឡើងដោយគិតគូរពីភាពងាយស្រួលក្នុងការប្រើប្រាស់ និងភាពជឿជាក់ ដោយជួយមន្ទីរពិសោធន៍ និងអាជីវកម្មសម្រេចបានលទ្ធផលត្រឹមត្រូវ និងអាចផលិតឡើងវិញបាន។ យើងប្តេជ្ញាចិត្តក្នុងការគាំទ្រអតិថិជនរបស់យើងជាមួយនឹងបច្ចេកវិទ្យាឆ្លាតវៃ និងសេវាកម្មពិសេស។'
-            },
-            profileContent2: {
-                en: 'We embrace the **Digital Future of Textile Testing** by developing smart instruments that combine cutting-edge **RFID, visual inspection, and IoT technologies with AI algorithms**. Our equipment is designed to connect seamlessly with modern lab management systems (like SmarTexLab, ERP, or LIMS) to achieve fully digitalized testing and production, making testing **transparent, faster, and more accurate**.',
-                km: 'យើងទទួលយក **អនាគតឌីជីថលនៃការធ្វើតេស្តវាយនភ័ណ្ឌ** ដោយការអភិវឌ្ឍឧបករណ៍ឆ្លាតវៃដែលរួមបញ្ចូលគ្នានូវបច្ចេកវិទ្យា **RFID, ការត្រួតពិនិត្យរូបភាព, និង IoT ជាមួយក្បួនដោះស្រាយ AI**។ ឧបករណ៍របស់យើងត្រូវបានរចនាឡើងដើម្បីភ្ជាប់យ៉ាងរលូនជាមួយប្រព័ន្ធគ្រប់គ្រងមន្ទីរពិសោធន៍ទំនើប (ដូចជា SmarTexLab, ERP, ឬ LIMS) ដើម្បីសម្រេចបាននូវការធ្វើតេស្ត និងការផលិតឌីជីថលពេញលេញ ដែលធ្វើឱ្យការធ្វើតេស្តមានភាព **តម្លាភាព លឿន និងត្រឹមត្រូវជាងមុន**។'
-            },
+// --- TRANSLATIONS ---
+const TRANSLATIONS = {
+  navTitle:{en:'Angkor-Cali', km:'អង្គរ-កាលី'},
+  navHome:{en:'Home', km:'ទំព័រដើម'},
+  navProfile:{en:'Profile', km:'ប្រវត្តិក្រុមហ៊ុន'},
+  navProducts:{en:'Products', km:'ផលិតផល'},
+  navServices:{en:'Our Services', km:'សេវាកម្មរបស់យើង'},
+  navConsumables:{en:'Consumables', km:'សម្ភារៈប្រើប្រាស់'},
+  navContact:{en:'Contact Us', km:'ទំនាក់ទំនង'},
+  heroTitle:{en:'Innovative Textile Testing Solutions', km:'ដំណោះស្រាយសាកល្បងវាយនភ័ណ្ឌប្រកបដោយភាពច្នៃប្រឌិត'},
+  heroSubtitle:{en:'Providing high-quality and reliable machinery for the textile industry.', km:'ផ្គត់ផ្គង់គ្រឿងម៉ាស៊ីនដែលមានគុណភាពខ្ពស់ និងអាចទុកចិត្តបានសម្រាប់ឧស្សាហកម្មវាយនភ័ណ្ឌ។'},
+  heroButton:{en:'Explore Products', km:'ស្វែងយល់ពីផលិតផល'},
+  profileTitle:{en:'Company Profile', km:'ប្រវត្តិក្រុមហ៊ុន'},
+  productsTitle:{en:'Our Products', km:'ផលិតផលរបស់យើង'},
+  servicesTitle:{en:'Our Services', km:'សេវាកម្មរបស់យើង'},
+  contactTitle:{en:'Contact Us', km:'ទំនាក់ទំនងមកយើង'},
+  detailBackButton:{en:'← Back to Products', km:'← ត្រឡប់ទៅផលិតផលវិញ'},
+  footerText:{en:'@copy; 2024 Angkor-Cal Textile Machine. All rights reserved.', km:'© 2024 ម៉ាស៊ីនវាយនភ័ណ្ឌ អង្គរ-កាលី។ រក្សាសិទ្ធិគ្រប់យ៉ាង។'},
+  servicesContent1:{en:'We offer comprehensive technical support, installation, calibration, and training services for all our textile testing machines. Our commitment is to ensure your equipment operates at peak performance.', km:'យើងផ្តល់ជូនការគាំទ្រផ្នែកបច្ចេកទេស ការដំឡើង ការក្រិត និងសេវាបណ្តុះបណ្តាលសម្រាប់ម៉ាស៊ីនសាកល្បងទាំងអស់របស់យើង។'},
+  servicesContent2:{en:'From initial consultation to after-sales maintenance, our expert team provides swift, reliable service to minimize downtime and maximize lab efficiency.', km:'ចាប់ពីការពិគ្រោះដំបូងរហូតដល់ការថែទាំក្រោយលក់ ក្រុមអ្នកជំនាញផ្តល់សេវារហ័ស និងអាចទុកចិត្តបាន។'},
+  contactInfo1:{en:'<b>Address:</b> Phnom Penh, Cambodia (Office location will be provided upon request)', km:'<b>អាសយដ្ឋាន៖</b> ភ្នំពេញ កម្ពុជា (នឹងផ្តល់ទីតាំងការិយាល័យតាមការស្នើសុំ)'},
+  contactInfo2:{en:'<b>Email:</b> info@angkorcal.com', km:'<b>អ៊ីមែល៖</b> info@angkorcal.com'},
+  contactInfo3:{en:'<b>Phone:</b> (+855) 17 224 772', km:'<b>ទូរស័ព្ទ៖</b> (+855) 17 224 772'},
+  // ✅ Consumables strings
+  consumablesTitle:{en:'Lab Consumables', km:'សម្ភារៈបរិក្ខារ​មន្ទីរពិសោធន៍'},
+  consumablesIntro:{en:'Standardized fabrics, detergents, scales and accessories for textile testing.', km:'ក្រណាត់ស្តង់ដារ សាប៊ូ/ប៉ោដឺ និងគ្រឿងបន្លាស់សម្រាប់ការធ្វើតេស្តវាយនភ័ណ្ឌ។'}
+};
 
-            // --- PRODUCT LIST CONTENT (Card titles & descriptions) ---
-            'infradye-title': { en: 'InfraDye Infrared Lab Dyeing Machine', km: 'ម៉ាស៊ីនជ្រលក់ពណ៌មន្ទីរពិសោធន៍អ៊ីនហ្វ្រារ៉េដ InfraDye' },
-            'infradye-short': { en: 'Quickly makes stained samples at a lower cost using infrared heating. Multi-cup design allows simultaneous dyeing. Stable, durable, and quiet.', km: 'បង្កើតគំរូដែលបានជ្រលក់យ៉ាងរហ័សក្នុងតម្លៃទាបដោយប្រើកំដៅអ៊ីនហ្វ្រារ៉េដ។ ការរចនាពែងច្រើនអនុញ្ញាតឱ្យជ្រលក់ពណ៌ក្នុងពេលដំណាលគ្នា។ ស្ថិរភាព ប្រើប្រាស់បានយូរ និងស្ងាត់។' },
-            'smartpull-dual-title': { en: 'SmartPull Tensile Tester (Dual Column)', km: 'ម៉ាស៊ីនសាកល្បងកម្លាំងទាញ SmartPull (ជួរឈរទ្វេ)' },
-            'smartpull-dual-short': { en: 'AC servo-driven tester providing stable pulling force and higher accuracy for tension, compression, bending, tearing, and more.', km: 'ម៉ាស៊ីនសាកល្បងដំណើរការដោយ AC servo ផ្តល់កម្លាំងទាញមានស្ថិរភាព និងភាពត្រឹមត្រូវខ្ពស់សម្រាប់ការទាញ ការបង្ហាប់ ការបត់បែន ការរហែក និងផ្សេងៗទៀត។' },
-            'smartshrink-title': { en: 'SmartShrink Shrinkage Rate Tester', km: 'ម៉ាស៊ីនសាកល្បងអត្រារួមតូច SmartShrink' },
-            'smartshrink-short': { en: 'Measures fabric shrinkage and twist rate after washing/dry cleaning in under $5$ seconds. Fully compatible with various international standards.', km: 'វាស់ការរួញ និងអត្រាបង្វិលនៃក្រណាត់បន្ទាប់ពីបោកគក់/បោកស្ងួតក្នុងរយៈពេលតិចជាង $5$ វិនាទី។ ត្រូវគ្នាពេញលេញជាមួយស្តង់ដារអន្តរជាតិផ្សេងៗ។' },
-            'hydroburst-title': { en: 'HydroBurst Hydraulic Bursting Tester', km: 'ម៉ាស៊ីនសាកល្បងកម្លាំងផ្ទុះធារាសាស្ត្រ HydroBurst' },
-            'hydroburst-short': { en: 'Determines the expansion force and degree of materials using the elastic diaphragm method. Provides accurate control of expansion and breaking speed.', km: 'កំណត់កម្លាំង និងកម្រិតនៃការរីករបស់វត្ថុធាតុដោយប្រើវិធីសាស្ត្រយឺត (elastic diaphragm)។ ផ្តល់ការគ្រប់គ្រងត្រឹមត្រូវនៃល្បឿនរីក និងបំបែក។' },
-            'airficient-title': { en: 'AirFicient Air Permeability Tester', km: 'ម៉ាស៊ីនសាកល្បងភាពជ្រាបចូលខ្យល់ AirFicient' },
-            'airficient-short': { en: 'Tests the air permeability of textiles and breathable products. Simple to operate with automatic test head recognition for quick results in seconds.', km: 'សាកល្បងភាពជ្រាបចូលខ្យល់នៃវាយនភ័ណ្ឌ និងផលិតផលដែលអាចដកដង្ហើមបាន។ ងាយស្រួលដំណើរការជាមួយការស្គាល់ក្បាលសាកល្បងដោយស្វ័យប្រវត្តិដើម្បីលទ្ធផលរហ័សក្នុងរយៈពេលប៉ុន្មានវិនាទី។' },
-            'smartcrock-title': { en: 'SmartCrock Crockmeter', km: 'ម៉ាស៊ីនវាស់ភាពជាប់ពណ៌ SmartCrock Crockmeter' },
-            'smartcrock-short': { en: 'Tests the color fastness of textiles under rubbing conditions. A highly automated instrument that saves $40\%$ of testing time and reduces manual influence on results.', km: 'សាកល្បងភាពជាប់ពណ៌នៃវាយនភ័ណ្ឌក្រោមលក្ខខណ្ឌត្រដុស។ ឧបករណ៍ស្វ័យប្រវត្តិកម្មខ្ពស់ដែលសន្សំបាន $40\%$ នៃពេលវេលាសាកល្បង និងកាត់បន្ថយឥទ្ធិពលដោយដៃលើលទ្ធផល។' },
-            'smartcut-title': { en: 'SmartCut Fabric Sample Cutting System', km: 'ប្រព័ន្ធកាត់គំរូក្រណាត់ SmartCut' },
-            'smartcut-short': { en: 'Completes fabric sampling within $3$ minutes. Uses smart software and a unique algorithm to layout, project, and automatically mark samples.', km: 'បញ្ចប់ការយកគំរូក្រណាត់ក្នុងរយៈពេល $3$ នាទី។ ប្រើកម្មវិធីឆ្លាតវៃ និងក្បួនដោះស្រាយពិសេសដើម្បីរៀបចំ គម្រោង និងសម្គាល់គំរូដោយស្វ័យប្រវត្តិ។' },
-            'smartdispen-title': { en: 'SmartDispen Detergent Dispenser', km: 'ម៉ាស៊ីនចែកចាយសាប៊ូ SmartDispen' },
-            'smartdispen-short': { en: 'A sample preparation device that automatically weighs soap, dispenses water, and stirs for washing color fastness testing, ensuring high accuracy.', km: 'ឧបករណ៍រៀបចំគំរូដែលថ្លឹងសាប៊ូ ចែកចាយទឹក និងកូរដោយស្វ័យប្រវត្តិសម្រាប់ការធ្វើតេស្តភាពជាប់ពណ៌ក្នុងការបោកគក់ ដោយធានានូវភាពត្រឹមត្រូវខ្ពស់។' },
-            'smartdry-title': { en: 'SmartDry Drying Rate Tester', km: 'ម៉ាស៊ីនសាកល្បងអត្រាស្ងួត SmartDry' },
-            'smartdry-short': { en: 'Quickly simulates human sweating to determine the drying rate of quick-drying fabrics. Results match international third-party tests.', km: 'ត្រាប់តាមការបែកញើសរបស់មនុស្សយ៉ាងរហ័ស ដើម្បីកំណត់អត្រាស្ងួតនៃក្រណាត់ដែលស្ងួតលឿន។ លទ្ធផលត្រូវគ្នានឹងការធ្វើតេស្តភាគីទីបីអន្តរជាតិ។' },
-            'smartfill-title': { en: 'SmartFill Test Solution Preparer', km: 'ម៉ាស៊ីនរៀបចំដំណោះស្រាយសាកល្បង SmartFill' },
-            'smartfill-short': { en: 'Automatically prepares and heats soap solution, and outputs steel balls for washing color fastness testing, boosting accuracy and efficiency.', km: 'រៀបចំ និងកំដៅដំណោះស្រាយសាប៊ូដោយស្វ័យប្រវត្តិ និងបញ្ចេញគ្រាប់ដែកសម្រាប់ការធ្វើតេស្តភាពជាប់ពណ៌ក្នុងការបោកគក់ បង្កើនភាពត្រឹមត្រូវ និងប្រសិទ្ធភាព។' },
-            'smartindale-title': { en: 'Smartindale Abrasion & Pilling Tester', km: 'ម៉ាស៊ីនសាកល្បងសំណឹក និងគ្រាប់ក្រណាត់ Smartindale' },
-            'smartindale-short': { en: 'Uses a digital algorithm for accurate, calibration-free Lissajous curves. Switch between abrasion and pilling tests with a one-click touch.', km: 'ប្រើក្បួនដោះស្រាយឌីជីថលសម្រាប់ខ្សែកោង Lissajous ត្រឹមត្រូវ មិនចាំបាច់ក្រិត។ ប្តូររវាងការសាកល្បងសំណឹក និងគ្រាប់ក្រណាត់ដោយគ្រាន់តែប៉ះតែម្តង។' },
-            'smartpull-single-title': { en: 'SmartPull Tensile Tester (Single Column)', km: 'ម៉ាស៊ីនសាកល្បងកម្លាំងទាញ SmartPull (ជួរឈរតែមួយ)' },
-            'smartpull-single-short': { en: 'Specially built for textiles, leather, and footwear. Performs tension, compression, bending, tearing, and more with high accuracy and stable force.', km: 'សាងសង់ជាពិសេសសម្រាប់វាយនភ័ណ្ឌ ស្បែក និងស្បែកជើង។ អនុវត្តការទាញ ការបង្ហាប់ ការបត់បែន ការរហែក និងផ្សេងៗទៀតដោយភាពត្រឹមត្រូវខ្ពស់ និងកម្លាំងមានស្ថិរភាព។' },
-            'atmoexplorer-title': { en: 'AtmoExplorer Environmental Chamber', km: 'បន្ទប់បរិស្ថាន AtmoExplorer' },
-            'atmoexplorer-short': { en: 'Tests material resistance to heat, cold, dryness, and humidity. Excels at quick temperature/humidity control across various test sections.', km: 'សាកល្បងភាពធន់នៃសម្ភារៈទៅនឹងកំដៅ ភាពត្រជាក់ ភាពស្ងួត និងសំណើម។ ល្អឥតខ្ចោះក្នុងការគ្រប់គ្រងសីតុណ្ហភាព/សំណើមយ៉ាងឆាប់រហ័សនៅទូទាំងផ្នែកសាកល្បងផ្សេងៗ។' },
-            'innoflex-title': { en: 'InnoFlex Bally Flexing Tester', km: 'ម៉ាស៊ីនសាកល្បងការបត់បែន InnoFlex Bally Flexing Tester' },
-            'innoflex-short': { en: 'Tests the flexing resistance of leather, cloth, and other materials. Uses advanced servo motors for accurate positioning and reliable multi-sample testing.', km: 'សាកល្បងភាពធន់នៃការបត់បែននៃស្បែក ក្រណាត់ និងសម្ភារៈផ្សេងៗ។ ប្រើម៉ូទ័រ servo កម្រិតខ្ពស់សម្រាប់ការដាក់ទីតាំងត្រឹមត្រូវ និងការធ្វើតេស្តគំរូច្រើនដែលអាចទុកចិត្តបាន។' },
-            'propress-title': { en: 'ProPress Automatic Sample Cutter', km: 'ម៉ាស៊ីនកាត់គំរូស្វ័យប្រវត្តិ ProPress' },
-            'propress-short': { en: 'Fully automatic machine that punches/cuts test samples ($5\\times 5$mm) in under $8$ seconds. Saves over $80\%$ of sample preparation time for laboratories.', km: 'ម៉ាស៊ីនស្វ័យប្រវត្តិពេញលេញដែលដាល់/កាត់គំរូសាកល្បង ($5\\times 5$mm) ក្នុងរយៈពេលតិចជាង $8$ វិនាទី។ សន្សំបានជាង $80\%$ នៃពេលវេលារៀបចំគំរូសម្រាប់មន្ទីរពិសោធន៍។' },
-            'washtrue-title': { en: 'WashTrue Color Fastness Tester', km: 'ម៉ាស៊ីនសាកល្បងភាពជាប់ពណ៌ WashTrue' },
-            'washtrue-short': { en: 'Uses an intelligent temperature control algorithm to ensure reliable washing color fastness test results. Available in single and double cylinder specifications.', km: 'ប្រើក្បួនដោះស្រាយគ្រប់គ្រងសីតុណ្ហភាពឆ្លាតវៃ ដើម្បីធានាលទ្ធផលតេស្តភាពជាប់ពណ៌ក្នុងការបោកគក់ដែលអាចទុកចិត្តបាន។ មានក្នុងលក្ខណៈស៊ីឡាំងតែមួយ និងទ្វេ។' },
-            'elmenguide-title': { en: 'ElmenGuide Tearing Strength Tester', km: 'ម៉ាស៊ីនសាកល្បងកម្លាំងរហែក ElmenGuide' },
-            'elmenguide-short': { en: 'A stable and reliable Pendulum Tear Tester with an original balanced pendulum for improved accuracy and auto-recognition of weights/range.', km: 'ម៉ាស៊ីនសាកល្បងការរហែកប៉ោលដែលមានស្ថិរភាព និងអាចទុកចិត្តបាន ជាមួយនឹងប៉ោលមានតុល្យភាពដើមសម្រាប់ការកែលម្អភាពត្រឹមត្រូវ និងការស្គាល់ទម្ងន់/ជួរដោយស្វ័យប្រវត្តិ។' },
-            
-            // --- PRODUCT DETAIL CONTENT (Long description & Features) ---
-            'infradye-long': {
-                en: 'The **InfraDye** quickly makes stained samples at a lower cost. It works by **infrared heating principle**. A smart temp control algorithm and a **multi-cup design** enable it to dye multiple solutions at once. It is stable, durable, and quiet. It has a temp calibration function and multiple safety protections. High quality components, durable.',
-                km: '**InfraDye** បង្កើតគំរូដែលបានជ្រលក់យ៉ាងរហ័សក្នុងតម្លៃទាប។ វាដំណើរការដោយ **គោលការណ៍កំដៅអ៊ីនហ្វ្រារ៉េដ**។ ក្បួនដោះស្រាយគ្រប់គ្រងសីតុណ្ហភាពឆ្លាតវៃ និង **ការរចនាពែងច្រើន** អាចឱ្យវាជ្រលក់ដំណោះស្រាយច្រើនក្នុងពេលតែមួយ។ វាមានស្ថិរភាព ប្រើប្រាស់បានយូរ និងស្ងាត់។ វាមានមុខងារក្រិតសីតុណ្ហភាព និងការការពារសុវត្ថិភាពច្រើន។ គ្រឿងផ្សំគុណភាពខ្ពស់ ប្រើប្រាស់បានយូរ។'
-            },
-            'infradye-features': {
-                en: ['Heating Technology: Infrared heating principle for quick, uniform results.', 'Capacity: Multi-cup design for simultaneous dyeing of multiple solutions.', 'Control: Smart temperature control algorithm and temperature calibration function.', 'Operation: Stable, durable, quiet, and equipped with multiple safety protections.'],
-                km: ['បច្ចេកវិទ្យាកំដៅ៖ គោលការណ៍កំដៅអ៊ីនហ្វ្រារ៉េដសម្រាប់លទ្ធផលរហ័ស និងឯកសណ្ឋាន។', 'សមត្ថភាព៖ ការរចនាពែងច្រើនសម្រាប់ការជ្រលក់ដំណោះស្រាយច្រើនក្នុងពេលដំណាលគ្នា។', 'ការគ្រប់គ្រង៖ ក្បួនដោះស្រាយគ្រប់គ្រងសីតុណ្ហភាពឆ្លាតវៃ និងមុខងារក្រិតសីតុណ្ហភាព។', 'ប្រតិបត្តិការ៖ ស្ថិរភាព ប្រើប្រាស់បានយូរ ស្ងាត់ និងបំពាក់ដោយការការពារសុវត្ថិភាពច្រើន។']
-            },
-            'smartshrink-long': {
-                en: 'The **SmartShrink Shrinkage Rate Tester** measures fabric shrinkage and twist rate after washing, steaming, and dry cleaning. It takes **under 5 seconds**. It is fully compatible with various shrinkage testing standards, including AATCC, ASTM, ISO, JIS, and GB. SmartShrink can **automatically measure fabric shrinkage and generate test reports**. It saves test data and sample photos, also shows test results in real-time. Users can see them on PCs and smartphones using the **SmarTexLab app via IoT tech**. SmartShrink can also be connected with enterprise ERP or LIMS to facilitate shrinkage data management, make testing faster and **reduce costs by more than 90%**.',
-                km: '**ម៉ាស៊ីនសាកល្បងអត្រារួមតូច SmartShrink** វាស់ការរួញ និងអត្រាបង្វិលនៃក្រណាត់បន្ទាប់ពីបោកគក់ ចំហុយ និងបោកស្ងួត។ វាចំណាយពេល **តិចជាង 5 វិនាទី**។ វាត្រូវគ្នាពេញលេញជាមួយស្តង់ដារសាកល្បងការរួញផ្សេងៗ រួមមាន AATCC, ASTM, ISO, JIS, និង GB។ SmartShrink អាច **វាស់ការរួញក្រណាត់ដោយស្វ័យប្រវត្តិ និងបង្កើតរបាយការណ៍សាកល្បង**។ វារក្សាទុកទិន្នន័យសាកល្បង និងរូបថតគំរូ ក៏បង្ហាញលទ្ធផលសាកល្បងក្នុងពេលជាក់ស្តែងផងដែរ។ អ្នកប្រើប្រាស់អាចមើលពួកវានៅលើកុំព្យូទ័រ និងស្មាតហ្វូនដោយប្រើ **កម្មវិធី SmarTexLab តាមរយៈបច្ចេកវិទ្យា IoT**។ SmartShrink ក៏អាចភ្ជាប់ជាមួយសហគ្រាស ERP ឬ LIMS ដើម្បីសម្រួលដល់ការគ្រប់គ្រងទិន្នន័យរួញ ធ្វើឱ្យការធ្វើតេស្តលឿន និង **កាត់បន្ថយការចំណាយបានជាង 90%**។'
-            },
-            'smartshrink-features': {
-                en: ['Speed: Results in under $5$ seconds.', 'Connectivity: IoT technology integrates with SmarTexLab app, ERP, and LIMS.', 'Standards: Fully compatible with AATCC, ASTM, ISO, JIS, and GB.', 'Leading Users: adidas Germany, AEO, Anta, Bureau Veritas, Intertek, and China Textile Association.'],
-                km: ['ល្បឿន៖ លទ្ធផលក្នុងរយៈពេលតិចជាង $5$ វិនាទី។', 'ការតភ្ជាប់៖ បច្ចេកវិទ្យា IoT រួមបញ្ចូលជាមួយកម្មវិធី SmarTexLab, ERP, និង LIMS។', 'ស្តង់ដារ៖ ត្រូវគ្នាពេញលេញជាមួយ AATCC, ASTM, ISO, JIS, និង GB។', 'អ្នកប្រើប្រាស់ឈានមុខគេ៖ adidas Germany, AEO, Anta, Bureau Veritas, Intertek, និង China Textile Association។']
-            },
-            'hydroburst-long': {
-                en: '**HydroBurst** adopts **hydraulic drum explosion (elastic diaphragm method)** to determine the expansion force and expansion degree of materials such as knitted fabrics, woven fabrics, nonwoven fabrics and laminated fabrics, elastic woven fabrics, paper, etc., when they are subjected to simultaneous force in the warp, weft and all directions, or the resistance of materials to expansion and breaking. HydroBurst realizes **accurate control of the speed of expansion and breaking by one-time pre-testing**. Equipped with high precision sensors and intelligent recognition system for test cups, the HydroBurst provides higher precision and more efficient testing, and the sensor has a longer service life.',
-                km: '**HydroBurst** ប្រើ **ការផ្ទុះធារាសាស្ត្រ (វិធីសាស្ត្រយឺត)** ដើម្បីកំណត់កម្លាំង និងកម្រិតនៃការរីករបស់សម្ភារៈដូចជា ក្រណាត់ប៉ាក់ ក្រណាត់ត្បាញ ក្រណាត់មិនត្បាញ និងក្រណាត់ស្រទាប់ ក្រណាត់ត្បាញយឺត ក្រដាស ជាដើម នៅពេលដែលពួកវាត្រូវបានទទួលរងនូវកម្លាំងក្នុងពេលដំណាលគ្នាក្នុងទិសដៅបណ្តោយ ទទឹង និងទិសដៅទាំងអស់ ឬភាពធន់នៃសម្ភារៈទៅនឹងការពង្រីក និងការបំបែក។ HydroBurst សម្រេចបាន **ការគ្រប់គ្រងត្រឹមត្រូវនៃល្បឿនរីក និងបំបែកដោយការធ្វើតេស្តមុនតែម្តង**។ បំពាក់ដោយឧបករណ៍ចាប់សញ្ញាដែលមានភាពជាក់លាក់ខ្ពស់ និងប្រព័ន្ធសម្គាល់ឆ្លាតវៃសម្រាប់ពែងសាកល្បង HydroBurst ផ្តល់នូវភាពជាក់លាក់ខ្ពស់ និងការធ្វើតេស្តកាន់តែមានប្រសិទ្ធភាព ហើយឧបករណ៍ចាប់សញ្ញាមានអាយុកាលប្រើប្រាស់បានយូរ។'
-            },
-            'hydroburst-features': {
-                en: ['Method: Hydraulic Drum Explosion (Elastic Diaphragm Method).', 'Precision: Accurate control of expansion/breaking speed via one-time pre-testing.', 'Features: High precision sensors and intelligent test cup recognition system.', 'Suitable For: Knitted/woven/nonwoven fabrics, laminated fabrics, elastic fabrics, and paper.'],
-                km: ['វិធីសាស្ត្រ៖ ការផ្ទុះធារាសាស្ត្រ (វិធីសាស្ត្រយឺត elastic diaphragm)។', 'ភាពជាក់លាក់៖ ការគ្រប់គ្រងត្រឹមត្រូវនៃល្បឿនរីក/បំបែកតាមរយៈការធ្វើតេស្តមុនតែម្តង។', 'លក្ខណៈពិសេស៖ ឧបករណ៍ចាប់សញ្ញាដែលមានភាពជាក់លាក់ខ្ពស់ និងប្រព័ន្ធសម្គាល់ពែងសាកល្បងឆ្លាតវៃ។', 'សមស្របសម្រាប់៖ ក្រណាត់ប៉ាក់/ត្បាញ/មិនត្បាញ ក្រណាត់ស្រទាប់ ក្រណាត់យឺត និងក្រដាស។']
-            },
-            // Add other product details here following the same structure (for brevity, showing only the fixes)
-            // You can add the full details for the rest of your 17 products here.
-            
-            // Placeholder for other products to ensure they show *something* when clicked:
-            'default-long': {
-                en: 'This machine is a reliable solution for advanced textile testing. Detailed specifications are available upon request. Please contact us for a full product sheet.',
-                km: 'ម៉ាស៊ីននេះគឺជាដំណោះស្រាយដែលអាចទុកចិត្តបានសម្រាប់ការធ្វើតេស្តវាយនភ័ណ្ឌកម្រិតខ្ពស់។ លក្ខណៈបច្ចេកទេសលម្អិតមានផ្តល់ជូនតាមការស្នើសុំ។ សូមទាក់ទងមកយើងសម្រាប់សន្លឹកផលិតផលពេញលេញ។'
-            },
-            'default-features': {
-                en: ['High Automation Level', 'High Precision Sensors', 'IoT Ready Connectivity', 'Durable and Quiet Operation'],
-                km: ['កម្រិតស្វ័យប្រវត្តិកម្មខ្ពស់', 'ឧបករណ៍ចាប់សញ្ញាភាពជាក់លាក់ខ្ពស់', 'ការតភ្ជាប់ត្រៀមខ្លួនជាស្រេច IoT', 'ប្រតិបត្តិការប្រើប្រាស់បានយូរ និងស្ងាត់']
-            }
+function updateLanguage() {
+  document.querySelectorAll('[data-lang-key]').forEach(el => {
+    const key = el.getAttribute('data-lang-key');
+    const tr = TRANSLATIONS[key];
+    if(!tr) return;
+    let content = tr[currentLang] || tr['en'];
+    content = content.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>');
+    const allowHTML = ['profile-content-1','profile-content-2','contact-info-1','contact-info-2','contact-info-3'];
+    if (allowHTML.includes(el.id)) { el.innerHTML = content; } else { el.textContent = content; }
+  });
+  // Rerender sections that depend on language (headings already update via data-lang-key)
+  renderProductList();
+  renderConsumables();
+  document.body.classList.toggle('khmer-text', currentLang === 'km');
+}
 
-        };
+function renderProductList(){
+  const wrap = document.getElementById('product-list');
+  if (!wrap) return;
+  let html = '';
+  for (const key in PRODUCTS){
+    const p = PRODUCTS[key];
+    const titleKey = `${key}-title`;
+    const shortKey = `${key}-short`;
+    const title = (TRANSLATIONS[titleKey]?.[currentLang]) || key;
+    const shortDesc = (TRANSLATIONS[shortKey]?.[currentLang]) || (currentLang==='km'?'លម្អិតសូមទាក់ទងយើង':'Contact us for details');
+    html += `
+      <div data-product-id="${key}" class="product-card bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
+        <div class="w-full h-40 rounded-xl mb-4 overflow-hidden">
+          <img src="${p.image}" alt="${title}" class="w-full h-full object-cover" onerror="this.replaceWith(fallbackImg())" />
+        </div>
+        <h3 class="text-xl font-semibold text-blue-700 mb-2">${title}</h3>
+        <p class="text-gray-600 text-sm">${shortDesc}</p>
+      </div>`;
+  }
+  wrap.innerHTML = html;
+  document.querySelectorAll('#product-list .product-card').forEach(card=>{
+    card.addEventListener('click', e=>{
+      e.preventDefault();
+      const id = card.getAttribute('data-product-id');
+      showProductDetail(id);
+    });
+  });
+}
 
+function showProductDetail(productId){
+  const p = PRODUCTS[productId];
+  const box = document.getElementById('detail-content');
+  const titleKey = `${productId}-title`;
+  const longKey = `${productId}-long`;
+  const featKey = `${productId}-features`;
+  const title = (TRANSLATIONS[titleKey]?.[currentLang]) || productId;
+  const longDesc = (TRANSLATIONS[longKey]?.[currentLang]) || (currentLang==='km'?'សូមទាក់ទងសម្រាប់ព័ត៌មានបន្ថែម។':'Please contact us for full specifications.');
+  const features = (TRANSLATIONS[featKey]?.[currentLang]) || [];
+  const feats = Array.isArray(features) ? features.map(f=>`<li>${f}</li>`).join('') : '';
 
-        // --- 2. CORE FUNCTIONS ---
+  box.innerHTML = `
+    <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">${title}</h2>
+    <div class="w-full rounded-xl mb-6 overflow-hidden shadow-md">
+      <img src="${p.detailImage}" alt="${title}" class="w-full h-auto" onerror="this.replaceWith(fallbackImg(320,200))" />
+    </div>
+    <p class="text-lg text-gray-600 leading-relaxed mb-6">${longDesc.replace(/\*\*(.*?)\*\*/g,'<b>$1</b>')}</p>
+    ${feats?`<div class="mt-8 border-t border-gray-200 pt-6">
+      <h3 class="text-2xl font-semibold text-gray-700 mb-4">${currentLang==='en'?'Key Features':'លក្ខណៈពិសេសសំខាន់ៗ'}</h3>
+      <ul class="list-disc list-inside space-y-2 text-gray-600">${feats}</ul>
+    </div>`:''}`;
+  showSection('product-detail');
+}
 
-        /**
-         * Dynamic function to update all elements with data-lang-key
-         */
-        function updateLanguage() {
-            const elements = document.querySelectorAll('[data-lang-key]');
-            
-            elements.forEach(el => {
-                const key = el.getAttribute('data-lang-key');
-                const translation = TRANSLATIONS[key];
-                
-                if (translation) {
-                    let content = translation[currentLang] || translation['en']; // Fallback to English
-                    
-                    // Handle markdown formatting for bold text (replace **text** with <b>text</b>)
-                    content = content.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+// ✅ Render Consumables Grid
+function renderConsumables(){
+  const wrap = document.getElementById('consumables-list');
+  if (!wrap) return;
+  wrap.innerHTML = CONSUMABLES.map(item=>`
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+      <div class="w-full h-40">
+        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover" onerror="this.replaceWith(fallbackImg())"/>
+      </div>
+      <div class="p-4">
+        <h3 class="font-semibold text-blue-700 text-base">${item.title}</h3>
+      </div>
+    </div>
+  `).join('');
+}
 
-                    // Check if the element has an ID for specific content handling
-                    if (el.id === 'profile-content-1' || el.id === 'profile-content-2') {
-                         el.innerHTML = content;
-                    } else if (el.id === 'contact-info-1' || el.id === 'contact-info-2' || el.id === 'contact-info-3') {
-                         el.innerHTML = content; // Allows <b> in contact info
-                    } else {
-                        el.textContent = content;
-                    }
-                }
-            });
+function showSection(sectionId){
+  document.querySelectorAll('.section-content').forEach(sec=>{
+    const isTarget = sec.getAttribute('data-section') === sectionId;
+    sec.classList.toggle('hidden', !isTarget);
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+  if (sectionId==='products') renderProductList();
+  if (sectionId==='consumables') renderConsumables();
+}
 
-            // Re-render product list and detail if active to ensure language consistency
-            renderProductList(); 
-            // Also update body class for custom font if needed
-            document.body.classList.toggle('khmer-text', currentLang === 'km');
-        }
+function showMessageBox(message){
+  const box = document.getElementById('message-box');
+  document.getElementById('message-text').textContent = message;
+  box.classList.remove('hidden');
+  void box.offsetWidth;
+  box.classList.add('show');
+}
 
-        /**
-         * Renders the product list section with clickable cards.
-         */
-        function renderProductList() {
-            const productListContainer = document.getElementById('product-list');
-            let html = '';
+// Simple placeholder image element
+function fallbackImg(w=400,h=160){
+  const div = document.createElement('div');
+  div.className = 'img-fallback';
+  div.style.width = '100%';
+  div.style.height = h+'px';
+  div.innerHTML = '<span>Image coming soon</span>';
+  return div;
+}
 
-            // Map product data to the card structure
-            for (const key in PRODUCTS) {
-                const product = PRODUCTS[key];
-                
-                // Get translated texts (fallback to default if specific content is missing)
-                const titleKey = `${key}-title`;
-                const shortDescKey = `${key}-short`;
+// --- INIT ---
 
-                const title = TRANSLATIONS[titleKey] ? TRANSLATIONS[titleKey][currentLang] : key; // Use key as fallback
-                const shortDesc = TRANSLATIONS[shortDescKey] ? TRANSLATIONS[shortDescKey][currentLang] : TRANSLATIONS['default-short'][currentLang];
-                
-                html += `
-                    <!-- Product Card: ${key} -->
-                    <div data-product-id="${key}" class="product-card block bg-white rounded-xl shadow-lg p-6 border border-gray-200 hover:border-blue-500 hover:shadow-xl transition duration-300">
-                        <img src="${product.image}" onerror="this.onerror=null;this.src='${product.image}';" alt="${title}" class="w-full h-40 object-cover rounded-xl mb-4" />
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">${title}</h3>
-                        <p class="text-gray-600 text-sm">${shortDesc}</p>
-                    </div>
-                `;
-            }
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuToggle.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
 
-            productListContainer.innerHTML = html;
+  // Hero carousel
+  let currentImage = 0; const carouselItems = document.querySelectorAll('.carousel-item');
+  setInterval(()=>{ carouselItems[currentImage].classList.remove('active'); currentImage=(currentImage+1)%carouselItems.length; carouselItems[currentImage].classList.add('active'); },5000);
 
-            // Re-attach listeners to the dynamically created product cards
-            document.querySelectorAll('.product-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const productId = card.getAttribute('data-product-id');
-                    showProductDetail(productId);
-                });
-            });
-        }
-        
-        /**
-         * Renders the dynamic product detail page.
-         * @param {string} productId - The ID of the product to display.
-         */
-        function showProductDetail(productId) {
-            const product = PRODUCTS[productId];
-            const detailContainer = document.getElementById('detail-content');
-            
-            // Fallback keys for translation
-            const titleKey = `${productId}-title`;
-            const longDescKey = `${productId}-long`;
-            const featuresKey = `${productId}-features`;
+  // Nav link handling
+  document.querySelectorAll('.nav-link').forEach(link=>{
+    link.addEventListener('click', e=>{
+      e.preventDefault();
+      const sec = e.currentTarget.getAttribute('data-section');
+      if (!sec) return;
+      showSection(sec);
+      mobileMenu.classList.add('hidden');
+    });
+  });
 
-            // Get translations or use default
-            const title = TRANSLATIONS[titleKey] ? TRANSLATIONS[titleKey][currentLang] : productId;
-            const longDesc = TRANSLATIONS[longDescKey] ? TRANSLATIONS[longDescKey][currentLang] : TRANSLATIONS['default-long'][currentLang];
-            const features = TRANSLATIONS[featuresKey] ? TRANSLATIONS[featuresKey][currentLang] : TRANSLATIONS['default-features'][currentLang];
+  // Language toggle
+  const toggleLanguage = ()=>{ currentLang = currentLang==='en'?'km':'en'; updateLanguage(); };
+  document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+  document.getElementById('lang-toggle-mobile').addEventListener('click', toggleLanguage);
+  document.getElementById('message-close').addEventListener('click', ()=>{
+    const box = document.getElementById('message-box'); box.classList.remove('show'); setTimeout(()=> box.classList.add('hidden'),300);
+  });
 
-            // Render features list HTML
-            let featuresHtml = features.map(feature => `<li>${feature}</li>`).join('');
-            
-            // HTML for the detail page (replaces existing content)
-            let html = `
-                <h2 class="text-4xl font-bold text-center text-blue-800 mb-8">${title}</h2>
-                <img src="${product.detailImage}" onerror="this.onerror=null;this.src='${product.detailImage}';" alt="${title}" class="w-full h-auto rounded-xl mb-6 shadow-md" />
-                <p class="text-lg text-gray-600 leading-relaxed mb-6">
-                    ${longDesc.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>')}
-                </p>
-                <div class="mt-8 border-t border-gray-200 pt-6">
-                    <h3 class="text-2xl font-semibold text-gray-700 mb-4">${currentLang === 'en' ? 'Key Features' : 'លក្ខណៈពិសេសសំខាន់ៗ'}</h3>
-                    <ul class="list-disc list-inside space-y-2 text-gray-600">
-                        ${featuresHtml}
-                    </ul>
-                </div>
-            `;
-            
-            detailContainer.innerHTML = html;
-            showSection('product-detail'); // Show the dedicated detail section
-        }
-
-        /**
-         * Global function to show a specific content section and hide others.
-         * @param {string} sectionId - The ID or data-section attribute value of the section to show.
-         */
-        function showSection(sectionId) {
-            document.querySelectorAll('.section-content').forEach(section => {
-                const isTarget = section.getAttribute('data-section') === sectionId;
-                section.classList.toggle('hidden', !isTarget);
-            });
-
-            // Scroll to the top of the main content area
-            window.scrollTo(0, 0); 
-
-            // If navigating to the products list, re-render it to ensure language/events are correct
-            if (sectionId === 'products') {
-                renderProductList();
-            }
-        }
-        
-        /**
-         * Custom function to display a message box instead of alert().
-         * @param {string} message - The message content.
-         */
-        function showMessageBox(message) {
-            const box = document.getElementById('message-box');
-            document.getElementById('message-text').textContent = message;
-            box.classList.remove('hidden');
-            // Force reflow and then show transition
-            void box.offsetWidth; 
-            box.classList.add('show');
-        }
-
-
-        // --- 3. EVENT LISTENERS & INITIALIZATION ---
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // 3.1. Mobile Menu Toggle
-            const menuToggle = document.getElementById('menu-toggle');
-            const mobileMenu = document.getElementById('mobile-menu');
-            
-            menuToggle.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // 3.2. Carousel (Hero Images)
-            let currentImage = 0;
-            const carouselItems = document.querySelectorAll('.carousel-item');
-            
-            function nextImage() {
-                carouselItems[currentImage].classList.remove('active');
-                currentImage = (currentImage + 1) % carouselItems.length;
-                carouselItems[currentImage].classList.add('active');
-            }
-            // Start the carousel
-            setInterval(nextImage, 5000); 
-
-            // 3.3. Navigation Handlers (for main sections)
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionId = e.currentTarget.getAttribute('data-section');
-                    
-                    if (sectionId && sectionId.startsWith('product-')) {
-                        // For product cards, only show the main product list for now, 
-                        // as detailed viewing is handled by the dedicated click event on the card itself
-                        showProductDetail(sectionId.replace('product-', ''));
-                    } else if (sectionId) {
-                        showSection(sectionId);
-                        // Hide mobile menu after clicking
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
-
-            // 3.4. Language Toggle
-            const langToggleDesktop = document.getElementById('lang-toggle');
-            const langToggleMobile = document.getElementById('lang-toggle-mobile');
-
-            const toggleLanguage = () => {
-                currentLang = currentLang === 'en' ? 'km' : 'en';
-                updateLanguage();
-            };
-
-            langToggleDesktop.addEventListener('click', toggleLanguage);
-            langToggleMobile.addEventListener('click', toggleLanguage);
-
-
-            // 3.5. Message Box Close Handler
-            document.getElementById('message-close').addEventListener('click', () => {
-                const box = document.getElementById('message-box');
-                box.classList.remove('show');
-                setTimeout(() => box.classList.add('hidden'), 300); // Wait for transition
-            });
-
-            // 3.6. Initial Load: Show Home, Render Product List, Apply Language
-            updateLanguage(); // Apply initial language (English)
-            showSection('home');
-        });
-
-        // Add any missing product details to the TRANSLATIONS object using the structure provided.
-        // If a product detail is clicked and no specific content is found, it will use the 'default-long' and 'default-features' translations.
-    </script>
+  updateLanguage();
+  showSection('home');
+});
+</script>
 </body>
 </html>
 
